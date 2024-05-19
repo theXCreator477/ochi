@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "semibold";
+    src: url("./assets/fonts/FoundersGrotesk-Semibold.woff");
+}
+
+@font-face {
+    font-family: "regular";
+    src: url("./assets/fonts/NeueMontreal-Regular.woff");
+}
+
+.semibold {
+    font-family: "semibold";
+}
+
+.regular {
+    font-family: "regular";
+}
