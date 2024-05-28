@@ -1,8 +1,27 @@
-import React from 'react'
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import React, { useRef } from 'react'
 
 function Achievements() {
+  const cards = useRef(null);
+
+  useGSAP(() => {
+    gsap.from(cards.current.children, {
+      opacity: 0,
+      y: 200,
+      stagger: 0.2,
+      duration: 1,
+      scrollTrigger: {
+        scroll: 'body',
+        trigger: cards.current,
+        start: 'top 70%',
+        end: 'top 50%'
+      }
+    });
+  });
+
   return (
-    <div className='flex flex-wrap gap-4 px-4 py-16 justify-center'>
+    <div ref={cards} className='flex flex-wrap gap-4 px-4 py-16 justify-center'>
         <div className='h-[30rem] w-full flex lg:w-[45vw]
         justify-center items-center rounded-2xl bg-[#004D43] text-[#CDEA68]'>
         <svg width="72" height="30" viewBox="0 0 72 30" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -7,7 +7,7 @@ import Featured from './components/Featured';
 import Achievements from './components/Achievements';
 import Start from './components/Start';
 import Footer from './components/Footer'
-
+import Cursor from './components/Cursor';
 import LocomotiveScroll from 'locomotive-scroll';
 
 function App() {
@@ -27,6 +27,7 @@ function App() {
       <Start />
       <Eyes />
       <Footer />
+      <Cursor />
     </div>
   )
 }
