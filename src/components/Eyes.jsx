@@ -14,6 +14,7 @@ function Eyes() {
 
     return (
         <div
+        id='eyes'
         data-scroll data-scroll-speed='0.1'
         className='relative bottom-[30vw] z-2'>
             <div className='flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 gap-[7vw]'>

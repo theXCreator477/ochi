@@ -1,0 +1,69 @@
+@media (max-width: 500px) {
+    #nav-options {
+        display: none;
+    }
+
+    #nav-icon {
+        display: block;
+    }
+
+    #landing {
+        padding-bottom: 3rem;
+        
+        img {
+            border-radius: 0.5rem;
+        }
+
+        #mt-container {
+            padding-top: 3rem;
+            font-size: 15vw;
+            line-height: 12vw;
+        }
+
+        > :nth-child(2) {
+            flex-direction: column;
+            gap: 3rem;
+        }
+    }
+
+    #about {
+        > div {
+            flex-direction: column;
+            gap: 2rem;
+            
+            > * {
+                width: 100%;
+            }
+        }
+    }
+
+    #eyes, #eyes-bg {
+        display: none;
+    }
+
+    #cards-tab {
+        flex-direction: column;
+        
+        #card {
+            width: 100%;
+
+            #inner-card {
+                height: 70vw;
+            }
+
+            button {
+                font-size: 0.65rem;
+            }
+        }
+    }
+
+    #MQfooter {
+        flex-direction: column;
+
+        h1 {
+            font-size: 15vw;
+            line-height: 12vw;
+        }
+    }
+
+}

@@ -49,6 +49,7 @@ function About() {
 
     return (
         <div
+        id='about'
         data-scroll data-scroll-speed='0.01'
         className='bg-[#CDEA68] rounded-2xl text-emerald-950'>
             <p id='item1' className='regular tracking-wide leading-tight text-4xl px-4 pt-20 pb-12'>Ochi is a strategic partner for fast-growing tech businesses that need to raise funds, sell products, explain complex ideas, and hire great people.</p>

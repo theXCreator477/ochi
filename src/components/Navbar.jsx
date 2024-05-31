@@ -1,15 +1,26 @@
 import React, { useRef } from 'react'
 import '../index.css'
+import { CgMenuRight } from "react-icons/cg";
+import { RxCross2 } from "react-icons/rx";
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
 function Navbar() {
     const svgRef = useRef(null);
     const navRef = useRef(null);
+    const sideMenu = useRef(null);
+    const smOptions = useRef(null);
+    const navIcon = useRef(null);
+
     let lineEffect = [];
+    let SMAnimation;
+
+    window.addEventListener('scroll', () => {
+        SMAnimation.reverse();
+    });
 
     useGSAP(() => {
-        const tl = gsap.timeline();
+        let tl = gsap.timeline();
         tl.from(svgRef.current, {
             x: -30,
             opacity: 0,
@@ -17,7 +28,7 @@ function Navbar() {
             duration: 0.5,
         });
 
-        tl.from(navRef.current.children, {
+        tl.from([navRef.current.children, navIcon.current], {
             y: -30,
             opacity: 0,
             duration: 0.5,
@@ -30,15 +41,34 @@ function Navbar() {
                         ease: 'power3.inOut',
                         paused: true
                     });
-            
+
                     lineEffect.push(tween);
                 });
             },
         });
+
+        tl = new gsap.timeline({paused: true});
+        SMAnimation = tl.to(sideMenu.current, {
+            x: '-50vw',
+            duration: 0.75,
+            ease: 'power4.inOut'
+        }).from(smOptions.current.children, {
+            x: 50,
+            opacity: 0,
+            stagger: 0.04,
+        }, '-=0.35');
     });
 
+    function displaySM() {
+        SMAnimation.play(0);
+    }
+
+    function hideSM() {
+        SMAnimation.reverse(0);
+    }
+
     return (
-        <div className='relative z-20 px-8 py-5 flex justify-between items-center font-thin regular text-sm backdrop-blur-sm w-full'>
+        <div id='navbar' className='relative z-20 px-8 py-5 flex justify-between items-center font-thin regular text-sm backdrop-blur-sm w-full'>
 
             <svg ref={svgRef} width="72" height="30" viewBox="0 0 72 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9.8393 10.2032C4.22951 10.3257 -0.0459221 14.7356 0.000372391 20.2752C0.0412204 25.3548 4.57808 30.3608 10.6862 29.9226C15.5145 29.5768 19.9015 25.4119 19.8525 20.0057C19.8035 14.5995 15.1904 10.0916 9.8393 10.2032ZM9.89649 25.7005C6.87101 25.7005 4.39834 23.1144 4.40924 19.9839C4.39525 19.2507 4.52792 18.522 4.79947 17.8407C5.07102 17.1594 5.47597 16.5392 5.99056 16.0164C6.50515 15.4937 7.11902 15.0789 7.79613 14.7966C8.47324 14.5142 9.19995 14.3698 9.93362 14.372C10.6673 14.3742 11.3931 14.5228 12.0686 14.8092C12.744 15.0956 13.3554 15.514 13.8668 16.0398C14.3783 16.5656 14.7796 17.1882 15.0471 17.8711C15.3146 18.554 15.4429 19.2834 15.4246 20.0166C15.4409 23.1008 12.9111 25.7059 9.88832 25.7005H9.89649Z" fill="currentColor"></path>
@@ -48,7 +78,22 @@ function Navbar() {
                 <path d="M52.4097 10.1387C51.2512 10.1119 50.1066 10.3947 49.0941 10.958C48.0816 11.5212 47.2379 12.3445 46.6501 13.3427V0.172852H42.293V29.4688H46.6501C46.6501 29.1721 46.6501 18.7816 46.6501 18.7816C46.6501 15.6946 47.8619 13.4352 50.8084 13.4352C54.6046 13.4352 54.6209 17.4178 54.6209 19.6962C54.6209 22.9165 54.6209 25.5189 54.6209 28.7393V29.4987H59.0271C59.0271 29.3708 59.0488 29.2728 59.0488 29.1721C59.0488 25.5108 59.0951 21.8522 59.0325 18.1909C58.9916 15.6538 58.5015 10.1387 52.4097 10.1387Z" fill="currentColor"></path>
             </svg>
 
-            <div ref={navRef} className='flex gap-8'>
+            <div ref={navIcon}>
+            <CgMenuRight onClick={displaySM} id='nav-icon' className='hidden cursor-pointer text-2xl' />
+            </div>
+
+            <div ref={sideMenu} className='bg-zinc-900 text-zinc-100 h-screen w-1/2 absolute top-0 z-20 left-full flex flex-col gap-3 p-3'>
+                <div className="text-2xl flex justify-end"><RxCross2 onClick={hideSM} /></div>
+                <div ref={smOptions} className='flex flex-col'>
+                    {["services", "our Work", "about us", "insights", "contact us"].map((item, index) => (
+                        <a className='capitalize' key={index} href="#">{item}
+                            <div className='mt-1 h-[2px] rounded-full bg-zinc-100 scale-x-0'></div>
+                        </a>
+                    ))}
+                </div>
+            </div>
+
+            <div id='nav-options' ref={navRef} className='flex gap-8'>
                 {["services", "our Work", "about us", "insights", "contact us"].map((item, index) => (
                     <a
                         onMouseEnter={() => lineEffect[index].play()}

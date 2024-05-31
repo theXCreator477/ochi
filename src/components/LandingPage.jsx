@@ -7,9 +7,9 @@ import gsap from 'gsap';
 
 function LandingPage() {
     const landingRef = useRef(null);
-    const {contextSafe} = useGSAP();
+    const landingImg = useRef(null);
 
-    const animateLandingRef = contextSafe(() => {
+    useGSAP(() => {
         gsap.from(landingRef.current.children, {
             y: 100,
             opacity: 0,
@@ -19,31 +19,26 @@ function LandingPage() {
         });
     });
 
-    useEffect(() => {
-        animateLandingRef();
-    });
-
     return (
-        <div
+        <div 
+        id='landing'
         data-scroll data-scroll-speed='-0.7'
         className='px-8 pb-32'>
-            <div ref={landingRef} className="py-24 border-b-[1px] border-zinc-800">
+            <div id='mt-container' ref={landingRef} className="text-[6vw] leading-[5vw] py-24 border-b-[1px] border-zinc-800">
                 {["we create", "eye-opening", "presentations"].map((item, index) => (
                     <div key={index} className='flex gap-4 items-center'>
                         {index === 1 && 
                         
                         <motion.img
+                        ref={landingImg}
                         initial={{ width: 0 }}
-                        animate={{ width: '7rem' }}
+                        animate={{ width: '1.25em' }}
                         transition={{ ease: [0.85, 0, 0.15, 1], duration: 1.25, delay: 1.5 }}
-                        className='rounded-2xl w-[7rem] h-[4.5rem] mt-2 bg-red-500 flex justify-center'
+                        className='rounded-2xl w-[1.25em] h-[0.8em] mt-2 bg-red-500 flex justify-center'
                         src={landing}>
-
-                            
-
                         </motion.img>}
 
-                        <h1 key={index} className='semibold text-8xl uppercase leading-[4.75rem]'>{item}</h1>
+                        <h1 key={index} className='semibold uppercase'>{item}</h1>
                     </div>
                 ))}
             </div>
@@ -52,7 +47,7 @@ function LandingPage() {
                 {["For public and private companies", "From the first pitch to IPO"].map((item, index) => (
                     <p key={index} className='regular text-sm'>{item}</p>
                 ))}
-                <p className='py-1 px-4 border rounded-full'>START THE PROJECT</p>
+                <p className='py-1 px-4 border rounded-full w-fit'>START THE PROJECT</p>
             </div>
         </div>
     )

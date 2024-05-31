@@ -35,7 +35,7 @@ function CardsTab({ url1, url2, name1, name2, buttons1, buttons2 }) {
   });
 
   return (
-    <div ref={cardsRef} className='flex relative z-20 justify-center gap-6 px-8 py-12'>
+    <div id='cards-tab' ref={cardsRef} className='flex relative z-20 justify-center gap-6 px-8 py-12'>
 
       <div className='flex overflow-hidden absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 text-center pointer-events-none'>
         {name1.split('').map((item, index) => (
@@ -58,6 +58,7 @@ function CardsTab({ url1, url2, name1, name2, buttons1, buttons2 }) {
       </div>
 
       <motion.div
+       id='card'
         ref={card1}
         onHoverStart={() => handleHoverStart(0)}
         onHoverEnd={() => handleHoverEnd(0)}
@@ -66,6 +67,7 @@ function CardsTab({ url1, url2, name1, name2, buttons1, buttons2 }) {
         <h1 className='p-2 text-lg regular'>&#x2022;&nbsp;&nbsp;{name1}</h1>
 
         <motion.div
+          id='inner-card'
           animate={{ scale: 1 }}
           whileHover={{ scale: 0.95 }}
           transition={{ ease: [0.16, 1, 0.3, 1], duration: 1 }}
@@ -87,6 +89,7 @@ function CardsTab({ url1, url2, name1, name2, buttons1, buttons2 }) {
       </motion.div>
 
       <motion.div
+       id='card'
         ref={card2}
         onHoverStart={() => handleHoverStart(1)}
         onHoverEnd={() => handleHoverEnd(1)}
@@ -95,6 +98,7 @@ function CardsTab({ url1, url2, name1, name2, buttons1, buttons2 }) {
         <h1 className='p-2 text-lg regular'>&#x2022;&nbsp;&nbsp;{name2}</h1>
 
         <motion.div
+          id='inner-card'
           animate={{ scale: 1 }}
           whileHover={{ scale: 0.95 }}
           transition={{ ease: [0.16, 1, 0.3, 1], duration: 1 }}
